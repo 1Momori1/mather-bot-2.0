@@ -4,7 +4,7 @@
 
 ## Структура проекта
 
-- `bot_manager_telebot.py` — точка входа, запуск Telegram-бота-менеджера
+- `main.py` — точка входа, запуск Telegram-бота-менеджера
 - `handlers.py` — вся логика Telegram-бота и обработчики
 - `db.py` — работа с базой данных (SQLite)
 - `local_utils.py` — запуск/остановка локальных ботов
@@ -25,7 +25,7 @@
 ## Запуск
 
 ```bash
-python bot_manager_telebot.py
+python main.py
 ```
 
 ## Как добавить бота
@@ -38,7 +38,7 @@ python bot_manager_telebot.py
      - host (IP) устройства (например, телефона с Termux)
      - порт (обычно 22)
      - логин
-     - пароль
+     - пароль или путь к ключу
      - путь к скрипту на удалённом устройстве (например, `/data/data/com.termux/files/home/mybot.py`)
 
 ## Требования для SSH-ботов
