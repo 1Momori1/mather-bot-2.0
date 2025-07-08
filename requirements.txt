@@ -1,3 +1,2 @@
-aiogram==3.21.0
-aiosqlite==0.20.0
-psutil==7.0.0 
+pyTelegramBotAPI
+paramiko 
