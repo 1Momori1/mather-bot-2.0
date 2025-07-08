@@ -5,7 +5,14 @@ import os
 
 def start_local_bot(script_path):
     try:
-        p = subprocess.Popen([sys.executable, script_path])
+        # Лог сохраняется в logs/<имя_бота>.log
+        script_name = os.path.basename(script_path)
+        log_dir = 'logs'
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, f'{script_name}.log')
+        with open(log_path, 'a'):
+            pass  # создать файл, если не существует
+        p = subprocess.Popen([sys.executable, script_path], stdout=open(log_path, 'a'), stderr=subprocess.STDOUT)
         return True, None
     except Exception as e:
         return False, str(e)
@@ -29,4 +36,14 @@ def is_local_bot_running(script_path):
             result = subprocess.check_output(['ps', 'aux']).decode()
             return script_name in result
     except Exception:
-        return False 
+        return False
+
+
+def get_local_bot_log(script_path, lines=20):
+    script_name = os.path.basename(script_path)
+    log_path = os.path.join('logs', f'{script_name}.log')
+    if not os.path.exists(log_path):
+        return 'Лог-файл не найден.'
+    with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
+        log_lines = f.readlines()
+    return ''.join(log_lines[-lines:]) if log_lines else 'Лог пуст.' 
